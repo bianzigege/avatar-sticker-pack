@@ -17,6 +17,8 @@ The skill is designed for a zero-setup first run: one avatar plus a natural-lang
 - Generate each sticker as a separate image. Do not generate a multi-sticker grid as the final asset.
 - Use the built-in image generation tool by default. Request a real transparent background and preserve the alpha channel.
 - Add final text after image generation whenever possible. This prevents misspelled text and keeps typography consistent.
+- If multiple languages are requested, keep the same identity, action, palette, and source image across language packs; localize only the final text layer and use a font with proper shaping for the target script.
+- Treat complexion/skin tone as an identity constraint derived from the user's reference. Keep face, ears, and hands consistent within a pack while preserving white clothing, paper, highlights, and sticker borders.
 - Never make the Q version and human-proportion version share a pose library or proportion rules.
 
 ## Quick-start behavior
@@ -63,6 +65,7 @@ Resolve these parameters before generating:
 - `intents`: user-provided exact list, selected library items, or the preset intents;
 - `copy_source`: preset, `intent-library.json`, `recommended-copy.json`, or user-supplied exact copy;
 - `language`: language used for final text;
+- `languages`: optional list of parallel output languages; use one shared intent ID set across packs;
 - `platform`: optional target platform and its current export requirements;
 - `text`: `postprocess` by default, or `in-image` only when explicitly requested;
 - `count`: number of intents, not number of visual variants;
@@ -132,7 +135,7 @@ For each image:
 1. Confirm the file has an actual alpha channel. A checkerboard baked into RGB pixels is not transparency.
 2. Remove only the background when needed; do not erase white areas inside the character.
 3. Add a consistent white die-cut outline without covering important details.
-4. Add the exact sticker text in a readable, platform-safe position.
+4. Add the exact sticker text in a readable, platform-safe position. For Thai, Arabic, Indic, and other shaping-sensitive scripts, use a shaping-capable renderer rather than drawing code points independently.
 5. Save as an independent RGBA PNG.
 6. Preserve the original generated image separately from the final export.
 

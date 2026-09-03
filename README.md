@@ -20,6 +20,7 @@
 | 更多表情 | `compact` 6组、`standard` 12组、`full` 24组 |
 | 自定义文案 | 直接输入自己的文案，原样保留，不偷偷改字 |
 | 自定义风格 | 可指定语气、配色、道具、文字样式和平台 |
+| 多语言输出 | 同一套动作可同步生成中文、英文、泰语等语言版本 |
 | 独立交付 | 每个表情单独一张透明 PNG，同时提供预览图和 ZIP |
 
 ## 🚀 最短用法
@@ -225,6 +226,23 @@ Skill 内置 36 条可组合文案，覆盖工作流、状态、情绪和社交�
 - [真人版 6 张单图](examples/bianzigege-demo/outputs/real/)
 - [Q版 6 张单图](examples/bianzigege-demo/outputs/q/)
 - [完整案例说明](examples/bianzigege-demo.md)
+
+### 6. 多语言热梗版与肤色标准
+
+在同一套 Q 版辫子哥哥热梗中，进一步制作了 15 个表情的中文、英文和泰语版本。三套版本共用同一组动作和身份，只替换后置文案；泰语使用支持组合音标的排版方式，避免音标拆开。
+
+![辫子哥哥中文热梗版](examples/bianzigege-hot-memes/preview-q.png)
+
+![辫子哥哥英文热梗版](examples/bianzigege-hot-memes/preview-en.png)
+
+![辫子哥哥泰语热梗版](examples/bianzigege-hot-memes/preview-th.png)
+
+本案例还把用户确认的第 3 张参考图固化为肤色标准：脸、耳朵和手部统一使用浅暖象牙色，约为 `#F5EDE3`；白色衣领、纸张、高光和贴纸边保持纯白。
+
+- [中文 15 张 ZIP](examples/bianzigege-hot-memes/bianzigege-hot-memes-q.zip)
+- [英文 15 张 ZIP](examples/bianzigege-hot-memes/bianzigege-hot-memes-en.zip)
+- [泰语 15 张 ZIP](examples/bianzigege-hot-memes/bianzigege-hot-memes-th.zip)
+- [完整多语言案例说明](examples/bianzigege-hot-memes.md)
 
 ## 📦 交付结构
 
