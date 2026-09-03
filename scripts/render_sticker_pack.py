@@ -45,15 +45,15 @@ def load_font(font_path: Path | None, size: int):
     return ImageFont.load_default()
 
 
-def add_label(image: Image.Image, label: str, font) -> Image.Image:
-    canvas = Image.new("RGBA", image.size, (0, 0, 0, 0))
+def add_label(image: Image.Image, label: str, font, size: int) -> Image.Image:
+    canvas = Image.new("RGBA", (size, size), (0, 0, 0, 0))
     image = image.convert("RGBA")
-    image.thumbnail((int(image.width * 0.84), int(image.height * 0.84)), Image.Resampling.LANCZOS)
+    image.thumbnail((int(size * 0.84), int(size * 0.84)), Image.Resampling.LANCZOS)
     canvas.alpha_composite(image, ((canvas.width - image.width) // 2, 0))
     draw = ImageDraw.Draw(canvas)
     box = draw.textbbox((0, 0), label, font=font, stroke_width=0)
     x = (canvas.width - (box[2] - box[0])) // 2
-    y = canvas.height - (box[3] - box[1]) - 44
+    y = canvas.height - (box[3] - box[1]) - max(24, int(size * 0.035))
     draw.text((x, y), label, font=font, fill=(20, 20, 20, 255),
               stroke_width=max(4, getattr(font, "size", 48) // 8),
               stroke_fill=(255, 255, 255, 255))
@@ -64,7 +64,7 @@ def main() -> int:
     args = parse_args()
     labels = json.loads(args.labels_file.read_text(encoding="utf-8"))
     args.output_dir.mkdir(parents=True, exist_ok=True)
-    font = load_font(args.font, 96)
+    font = load_font(args.font, max(36, int(args.size * 0.075)))
     outputs: list[Path] = []
 
     for source in sorted(args.input_dir.iterdir()):
@@ -76,7 +76,7 @@ def main() -> int:
         with Image.open(source) as source_image:
             if source_image.mode not in {"RGBA", "LA"}:
                 raise SystemExit(f"{source.name} has no alpha channel; fix transparency first")
-            rendered = add_label(source_image, str(label), font)
+            rendered = add_label(source_image, str(label), font, args.size)
             target = args.output_dir / f"{source.stem}.png"
             rendered.save(target, "PNG", optimize=True)
             outputs.append(target)
