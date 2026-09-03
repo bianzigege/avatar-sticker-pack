@@ -7,7 +7,7 @@ description: Generate a reusable sticker pack from one or more user-provided ava
 
 Turn a user-provided avatar into a coherent, paired sticker pack. Keep the user's identity stable while varying only the action, expression, prop, and text.
 
-The skill is designed for a zero-setup first run: one avatar plus a natural-language request is enough. See the [Bianzigege example](examples/bianzigege-demo.md) for a complete demonstration.
+The skill is designed for a zero-setup first run: one avatar plus a natural-language request is enough. See the repository [README](README.md) for the user-facing demonstration and the [detailed Bianzigege example](examples/bianzigege-demo.md) for the full case.
 
 ## Operating principles
 
