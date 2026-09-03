@@ -10,6 +10,13 @@ Input images: Image 1 is the user's avatar identity reference; Image 2 is an opt
 Primary request:
 Generate one independent sticker for the intent "[EXACT TEXT]".
 
+Customization:
+Tone: [optional tone]
+Palette: [optional palette]
+Main prop: [optional prop]
+Text style: [optional text style]
+Output size: [requested square size]
+
 Identity lock:
 [task-specific identity lock from identity-lock.md]
 

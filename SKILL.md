@@ -21,15 +21,24 @@ The skill is designed for a zero-setup first run: one avatar plus a natural-lang
 
 ## Quick-start behavior
 
-If the user supplies one avatar and asks for a sticker pack without further details, default to:
+If the user supplies one avatar and asks for a sticker pack without further details, default to the `standard` preset:
 
 - two tracks: `real` and `q`;
-- six paired intents: `收到`, `正在执行`, `已交付`, `可验收`, `我裂开了`, `收工`;
+- twelve paired intents: the six compact intents plus `稳了`, `稍等一下`, `马上处理`, `请补充信息`, `需要确认`, `辛苦了`;
 - one `real` sticker and one `q` sticker for every intent;
 - square transparent PNG output with a restrained white die-cut outline;
 - separate folders, previews, and ZIP archives.
 
-If the user specifies only one track, generate only that track. If the user provides exact text, preserve it verbatim. Do not silently rewrite the user's copy.
+The presets are:
+
+| preset | paired stickers | use case |
+|---|---:|---|
+| `compact` | 6 | quick test or first-time user |
+| `standard` | 12 | recommended everyday pack |
+| `full` | 24 | complete work and social coverage |
+| `custom` | user-defined | exact labels and style controls |
+
+Read [intent-library.json](assets/intent-library.json) when the user asks for more copy or does not know what to choose. If the user specifies only one track, generate only that track. If the user provides exact text, preserve it verbatim. Do not silently rewrite the user's copy.
 
 ### Fast path for end users
 
@@ -37,18 +46,24 @@ When the user only says “用这张头像做一套表情包”, do not require 
 
 When the user asks for a demonstration, show the chain in this order: original avatar → extracted identity lock → paired intent plan → `real` result → `q` result → separated export folders. Use the same intent IDs across tracks so the user can compare them quickly.
 
+### Customization path
+
+Read [customization.md](references/customization.md) when the user asks for more stickers, custom copy, a specific tone, brand colors, props, proportions, text style, output size, or a platform-specific pack. Natural language is sufficient; do not force the user to write JSON. Resolve explicit user controls first, then fill only unspecified fields from the selected preset.
+
 ## Workflow
 
 ### 1. Classify the request
 
 Resolve these parameters before generating:
 
+- `preset`: `compact`, `standard`, `full`, or `custom`;
 - `tracks`: `real`, `q`, or `both`;
-- `intents`: user-provided list or the six default intents;
+- `intents`: user-provided exact list, selected library items, or the preset intents;
 - `language`: language used for final text;
 - `platform`: optional target platform and its current export requirements;
 - `text`: `postprocess` by default, or `in-image` only when explicitly requested;
-- `count`: number of intents, not number of visual variants.
+- `count`: number of intents, not number of visual variants;
+- `tone`, `palette`, `props`, `proportion`, `text_style`, and `output_size`: optional user controls.
 
 ### 2. Inspect the avatar
 
@@ -80,7 +95,7 @@ Keep the avatar reference and the style anchor as separate inputs. The avatar co
 
 ### 4. Plan paired intents
 
-Build a table before generation:
+Build a table before generation. For the `standard` preset, use the 12 default intents. For `full` or `custom`, read the intent library and keep the same IDs across the two tracks.
 
 | id | text | intent | real action | q action |
 |---|---|---|---|---|
@@ -105,7 +120,7 @@ Read [prompt-schema.md](references/prompt-schema.md). For every image:
 - vary pose, placement, prop, and gesture across the pack;
 - forbid extra characters, watermarks, accidental logos, and unrelated text.
 
-Generate `real` and `q` images in separate passes. Do not ask the image model to create six stickers in one sheet.
+Generate `real` and `q` images in separate passes. Do not ask the image model to create a multi-sticker sheet. The sheet is only a preview assembled after the independent stickers are complete.
 
 ### 6. Post-process and export
 
