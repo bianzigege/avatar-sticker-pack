@@ -38,7 +38,7 @@ The presets are:
 | `full` | 24 | complete work and social coverage |
 | `custom` | user-defined | exact labels and style controls |
 
-Read [intent-library.json](assets/intent-library.json) when the user asks for more copy or does not know what to choose. If the user specifies only one track, generate only that track. If the user provides exact text, preserve it verbatim. Do not silently rewrite the user's copy.
+Read [intent-library.json](assets/intent-library.json) when the user asks for more copy or does not know what to choose. Read [recommended-copy.json](assets/recommended-copy.json) when the user asks for popular words, hot memes, internet slang, “活人感”, or recommended phrases. If the user specifies only one track, generate only that track. If the user provides exact text, preserve it verbatim. Do not silently rewrite the user's copy.
 
 ### Fast path for end users
 
@@ -50,6 +50,8 @@ When the user asks for a demonstration, show the chain in this order: original a
 
 Read [customization.md](references/customization.md) when the user asks for more stickers, custom copy, a specific tone, brand colors, props, proportions, text style, output size, or a platform-specific pack. Natural language is sufficient; do not force the user to write JSON. Resolve explicit user controls first, then fill only unspecified fields from the selected preset.
 
+When recommending copy, show a small categorized shortlist first, then offer the full 50-item list if the user wants to choose manually. Hot or meme-like wording is optional flavor, not a requirement: preserve professional alternatives for work contexts and flag replaceable templates such as `××基础，××不基础`.
+
 ## Workflow
 
 ### 1. Classify the request
@@ -59,6 +61,7 @@ Resolve these parameters before generating:
 - `preset`: `compact`, `standard`, `full`, or `custom`;
 - `tracks`: `real`, `q`, or `both`;
 - `intents`: user-provided exact list, selected library items, or the preset intents;
+- `copy_source`: preset, `intent-library.json`, `recommended-copy.json`, or user-supplied exact copy;
 - `language`: language used for final text;
 - `platform`: optional target platform and its current export requirements;
 - `text`: `postprocess` by default, or `in-image` only when explicitly requested;
