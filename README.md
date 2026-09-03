@@ -237,7 +237,7 @@ Skill 内置 36 条可组合文案，覆盖工作流、状态、情绪和社交�
 
 ![辫子哥哥泰语热梗版](examples/bianzigege-hot-memes/preview-th.png)
 
-本案例还把用户确认的第 3 张参考图固化为肤色标准：脸、耳朵和手部统一使用浅暖象牙色，约为 `#F5EDE3`；白色衣领、纸张、高光和贴纸边保持纯白。
+本案例还把用户确认的第 3 张参考图固化为肤色标准：脸、耳朵和手部统一使用接近白色、带轻微暖粉的象牙色，约为 `#FFF9F6`；白色衣领、纸张、高光和贴纸边保持纯白。成品使用统一浅灰实底 `#F3F3F3`，不再依赖透明背景。
 
 - [中文 15 张 ZIP](examples/bianzigege-hot-memes/bianzigege-hot-memes-q.zip)
 - [英文 15 张 ZIP](examples/bianzigege-hot-memes/bianzigege-hot-memes-en.zip)
