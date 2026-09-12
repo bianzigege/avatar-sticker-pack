@@ -12,7 +12,9 @@ Reject an image or pack when any required check fails.
 - One clear intent; the action reads at thumbnail size.
 - Hands, face, main prop, and signature feature are not clipped.
 - Text is exact, legible, and placed inside the safe area.
-- White outline is consistent and does not erase fine details.
+- Outline matches the selected `white` or `none` setting and does not erase fine details.
+- Frame matches `none` or `rectangle`; `both` delivers separate folders from the same artwork. No preview cell border remains in a frameless export.
+- Frame removal preserves the character, complexion, pose, props, and exact text. Tight margins do not clip the artwork; pure-image exports reserve no empty caption band.
 
 ## Pack-level checks
 

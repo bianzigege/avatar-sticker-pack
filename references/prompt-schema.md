@@ -16,6 +16,8 @@ Palette: [optional palette]
 Main prop: [optional prop]
 Text style: [optional text style]
 Output size: [requested square size]
+Frame: [none / rectangle / both; default none]
+Character outline: [white / none; independent of frame]
 
 Identity lock:
 [task-specific identity lock from identity-lock.md]
@@ -27,7 +29,7 @@ Action:
 [one clear action that communicates the intent]
 
 Composition:
-Square canvas, one character, centered readable silhouette, all important features inside safe margins, transparent background, restrained white die-cut outline, limited orange/yellow/blue accents only when they support the action.
+Square canvas, one character, centered readable silhouette, all important features inside safe margins, transparent background, selected character outline, limited orange/yellow/blue accents only when they support the action. Generate clean artwork without a rectangular frame by default; for frame=both, reuse this artwork and add the rectangle only to the framed export. See frame-variants.md for removal and export rules.
 
 Text:
 Do not generate text inside the image. The exact text will be added after generation.

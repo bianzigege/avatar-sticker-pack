@@ -16,6 +16,8 @@ Support natural language first. A user may provide only an avatar and a sentence
 | `text_style` | 黑体、手写、圆润、无文字 | Keep exact copy; only style and placement may vary |
 | `output_size` | 512、1024、2048 | Export square master PNGs at the requested size |
 | `platform` | 微信、飞书、Slack、Discord | Follow the platform constraints when specified |
+| `frame` | `none`, `rectangle`, `both` | Default `none`; rectangular outer frame, not character outline. See [frame variants](frame-variants.md) |
+| `outline` | `white`, `none` | Character die-cut edge; independent of rectangular frame |
 
 ## Natural-language examples
 

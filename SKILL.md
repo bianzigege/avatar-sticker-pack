@@ -15,6 +15,7 @@ The skill is designed for a zero-setup first run: one avatar plus a natural-lang
 - Never hard-code a person's hairstyle, clothing, accessory, colors, or personality into this skill.
 - Keep user images and generated outputs out of the reusable core. If the user explicitly asks to publish a demonstration, place those files under `examples/` and label them as example material rather than identity rules.
 - Generate each sticker as a separate image. Do not generate a multi-sticker grid as the final asset.
+- Resolve rectangular canvas frames separately from character die-cut outlines. Follow [frame-variants.md](references/frame-variants.md) for framed, frameless, or paired exports; preserve identity and drawing style when removing a frame.
 - Use the built-in image generation tool by default. Request a real transparent background and preserve the alpha channel.
 - Add final text after image generation whenever possible. This prevents misspelled text and keeps typography consistent.
 - If multiple languages are requested, keep the same identity, action, palette, and source image across language packs; localize only the final text layer and use a font with proper shaping for the target script.
@@ -67,6 +68,8 @@ Resolve these parameters before generating:
 - `language`: language used for final text;
 - `languages`: optional list of parallel output languages; use one shared intent ID set across packs;
 - `platform`: optional target platform and its current export requirements;
+- `frame`: `none` (default), `rectangle`, or `both`; paired frame variants reuse the same artwork;
+- `outline`: `white` (default) or `none`, independent of `frame`;
 - `text`: `postprocess` by default, or `in-image` only when explicitly requested;
 - `count`: number of intents, not number of visual variants;
 - `tone`, `palette`, `props`, `proportion`, `text_style`, and `output_size`: optional user controls.
@@ -134,7 +137,7 @@ For each image:
 
 1. Confirm the file has an actual alpha channel. A checkerboard baked into RGB pixels is not transparency.
 2. Remove only the background when needed; do not erase white areas inside the character.
-3. Add a consistent white die-cut outline without covering important details.
+3. Apply the selected outline (`white` or `none`) without covering important details. Apply the separately selected rectangular frame only when requested; never carry preview cell borders into frameless exports. Read [frame-variants.md](references/frame-variants.md) before frame-related edits.
 4. Add the exact sticker text in a readable, platform-safe position. For Thai, Arabic, Indic, and other shaping-sensitive scripts, use a shaping-capable renderer rather than drawing code points independently.
 5. Save as an independent RGBA PNG.
 6. Preserve the original generated image separately from the final export.
